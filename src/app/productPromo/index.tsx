@@ -12,24 +12,25 @@ export default function Product (props: ProductProps) {
            <Template>
                 <View style={{alignItems: 'center'}}>
                     <View style={styles.card}>
-                        <Image style={styles.itemImage} source={require('./../../assets/imgs/g733.png')}/>
+                        <Image style={styles.itemImage} source={require('./../../assets/imgs/akko.png')}/>
                     </View>       
                 </View>
 
                 <View style={{alignItems: 'center', marginTop: 20}}>
-                    <Text style={styles.title}>Logitech G733 Wireless</Text>
-                    <Text style={styles.value}>R$899,99</Text>
+                    <Text style={styles.title}>Akko 5075b plus</Text>
+                    <Text style={styles.valuePromo}>R$549,99</Text>
+                    <Text style={styles.value}>R$449,99</Text>
                 </View>
 
                 <View style={{alignItems: 'center'}}>
                     <View style={styles.infoView}>
                         <View style={styles.info}>
                             <Text style={styles.titleInfo}>Marca: </Text>
-                            <Text style={styles.subInfo}>Logitech</Text>
+                            <Text style={styles.subInfo}>Akko</Text>
                         </View>
                         <View style={styles.info}>
                             <Text style={styles.titleInfo}>Modelo: </Text>
-                            <Text style={styles.subInfo}>G733</Text>
+                            <Text style={styles.subInfo}>5075b plus</Text>
                         </View>
                         <View style={styles.info}>
                             <Text style={styles.titleInfo}>Cor: </Text>
@@ -37,7 +38,7 @@ export default function Product (props: ProductProps) {
                         </View>
                         <View style={styles.info}>
                             <Text style={styles.titleInfo}>Conectividade: </Text>
-                            <Text style={styles.subInfo}>Wireless</Text>
+                            <Text style={styles.subInfo}>Wireless / Usb c</Text>
                         </View>
                     </View>
                 </View>
@@ -65,20 +66,13 @@ const styles = StyleSheet.create ({
     },
 
     itemImage: {
-        width: 400,
-        height: 400
+        width: 300,
+        height: 150
     },
 
     title: {
         color: 'white',
-        fontSize: 30,
-        marginTop: 20
-    },
-
-    value: {
-        color: 'white',
-        fontSize: 30,
-        marginTop: 20
+        fontSize: 30
     },
 
     infoView: {
@@ -113,5 +107,18 @@ const styles = StyleSheet.create ({
         color: 'white',
         fontSize: 15,
         padding: 15
-    }
+    },
+
+    value: {
+        color: 'white',
+        fontSize: 30,
+        marginTop: 10,
+    },
+
+    valuePromo: {
+        color: '#0059A7',
+        fontSize: 20,
+        marginTop: 20,
+        textDecorationLine: 'line-through'
+    },
 })

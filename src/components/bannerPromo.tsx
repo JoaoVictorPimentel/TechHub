@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 
-export interface BannerProps {
+export interface BannerPromoProps {
 }
 
-export default function Banner (props: BannerProps) {
+export default function BannerPromo (props: BannerPromoProps) {
     return (
         <View style={{alignItems: 'center'}}> 
-            <Image style={styles.banner} source={require('./../assets/imgs/banner1.png')}/>
+            <Image style={styles.banner} source={require('./../assets/imgs/promo.png')}/>
         </View>
     );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, onClick} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
 import {Button, Icon} from '@rneui/themed';
 import { Input } from '@rneui/base';
 import { router } from 'expo-router';
@@ -16,7 +16,9 @@ export default function Template (props: TemplateProps) {
             <View style={styles.header}>
                 <View style={styles.headerItens}> 
                     <Button onPress={() => router.push('/login')} icon={{name: 'menu', color: 'white'}} type='clear'/>
-                    <Image style={styles.logo} source={require('./../assets/imgs/logo.png')}/>
+                    <TouchableOpacity onPress={() => router.push('')}>
+                        <Image style={styles.logo} source={require('./../assets/imgs/logo.png')}/>
+                    </TouchableOpacity>
                     <Button icon={{name: 'shopping-cart', color: 'white'}} type='clear'/>
                 </View>
             </View>
@@ -108,14 +110,14 @@ const styles = StyleSheet.create ({
     header: {
         backgroundColor: '#111',
         width: '100%',
-        height: 120,
-        flex: 1
+        height: 80,
+        flex: 1,
+        justifyContent: 'center'
     },
 
     headerItens: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: '15%',
         alignItems: 'center'
     },
 
@@ -171,5 +173,4 @@ const styles = StyleSheet.create ({
         flexDirection: 'row',
         marginTop: 10,
     }
-
 })
