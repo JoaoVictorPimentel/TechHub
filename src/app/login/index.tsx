@@ -2,11 +2,23 @@ import * as React from 'react';
 import { View, StyleSheet, Text, Image, ScrollView} from 'react-native';
 import {Button, Input} from '@rneui/themed';
 import { router } from 'expo-router';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useState } from 'react';
 
-export interface LoginScreenProps {
-}
-
-export default function LoginScreen (props: LoginScreenProps){
+export default function LoginScreen (){
+    
+    const [ resultado, setResultado ] = useState<null|'falhou'>(null);
+    
+    const handleLogin = async ({email, senha}:any) => {
+        await new Promise((resolve, error) => setTimeout(() => resolve(), 3000))
+      
+        if (email.trim() == 'admin@gmail.com' && senha.trim() == '12345678') 
+            router.push('')
+        else
+            setResultado('falhou')
+    }
+    
     return (
         <ScrollView>
             <View style={styles.background}>
@@ -17,21 +29,49 @@ export default function LoginScreen (props: LoginScreenProps){
                     </View>
                 </View>            
 
-                <Input style={styles.input}
-                    placeholder='Digite seu Email' 
-                    leftIcon={{name:'person', color:'white'}} 
-                    inputStyle={{color: 'white'}}/>
+                <Formik
+                    initialValues={{email: '', senha: ''}}
+                    validationSchema={Yup.object().shape({
+                      email: Yup.string().required('Informe o email').email('E-mail não é válido'),
+                      senha: Yup.string().required('Informe a senha').min(8, 'A senha precisa ter 8 caracteres')
+                    })}
+                    onSubmit={handleLogin}
+                >
+                    {({errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting}) => (
+                        <>
+                            <Input style={styles.input}
+                                placeholder='Digite seu Email' 
+                                leftIcon={{name:'person', color:'white'}} 
+                                inputStyle={{color: 'white'}}
+                                onBlur={handleBlur('email')}
+                                onChangeText={handleChange('email')}/>
+                            { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
 
-                <Input style={styles.input}
-                    keyboardType='numeric'
-                    placeholder='Digite sua senha' 
-                    leftIcon={{name:'lock', color:'white'}}
-                    inputStyle={{color: 'white'}}/>
+                            <Input style={styles.input}
+                                secureTextEntry
+                                placeholder='Digite sua senha' 
+                                leftIcon={{name:'lock', color:'white'}}
+                                inputStyle={{color: 'white'}}
+                                onBlur={handleBlur('email')}
+                                onChangeText={handleChange('senha')}/>
+                            { errors.senha && touched.senha && <Text style={styles.fail}>{errors.senha}</Text>}
 
 
-                <View style={{alignItems: 'center'}}> 
-                    <Button onPress={() => router.push('')} buttonStyle={styles.button} type='clear' titleStyle={{color: 'white', backgroundColor: ''}} title="Entrar"/>
-                </View>
+                            <View style={{alignItems: 'center'}}> 
+                                <Button
+                                    buttonStyle={styles.button} 
+                                    type='clear' 
+                                    titleStyle={{color: 'white', backgroundColor: ''}} 
+                                    title="Entrar"
+                                    onPress={() => handleSubmit()} 
+                                    disabled={isSubmitting}/>
+                            </View>
+
+                            { resultado == 'falhou' && <Text style={styles.fail}>Email ou senha incorretos</Text>}
+                        </>
+                    )}                                      
+                </Formik>
+
                 <Text style={styles.register}>Cadastre-se</Text>
                 <Text style={styles.register}>Esqueceu sua senha?</Text>
             </View>
@@ -43,7 +83,7 @@ const styles = StyleSheet.create ({
    background: {
     backgroundColor: '#222',
     width: '100%',
-    height: '100%',
+    height: 1000
    },
 
    boxLogin: {
@@ -90,5 +130,11 @@ const styles = StyleSheet.create ({
    logo: {
     width: 200,
     height: 160
-   }
+   },
+
+   fail: {
+    textAlign:'center',
+    color: 'red',
+    fontSize: 15
+  },
 })
