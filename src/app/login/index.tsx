@@ -11,7 +11,7 @@ export default function LoginScreen (){
     const [ resultado, setResultado ] = useState<null|'falhou'>(null);
     
     const handleLogin = async ({email, senha}:any) => {
-        await new Promise((resolve, error) => setTimeout(() => resolve(), 3000))
+        await new Promise((resolve, error) => setTimeout(() => resolve(), 1000))
       
         if (email.trim() == 'admin@gmail.com' && senha.trim() == '12345678') 
             router.push('')
@@ -41,8 +41,8 @@ export default function LoginScreen (){
                         <>
                             <Input style={styles.input}
                                 placeholder='Digite seu Email' 
-                                leftIcon={{name:'person', color:'white'}} 
-                                inputStyle={{color: 'white'}}
+                                leftIcon={{name:'person', color: (errors.email ? '#df361c' : 'white')}} 
+                                inputStyle={{color: (errors.email ? '#df361c' : 'white')}}
                                 onBlur={handleBlur('email')}
                                 onChangeText={handleChange('email')}/>
                             { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
@@ -50,8 +50,8 @@ export default function LoginScreen (){
                             <Input style={styles.input}
                                 secureTextEntry
                                 placeholder='Digite sua senha' 
-                                leftIcon={{name:'lock', color:'white'}}
-                                inputStyle={{color: 'white'}}
+                                leftIcon={{name:'lock', color: (errors.senha ? '#df361c' : 'white')}}
+                                inputStyle={{color: (errors.senha ? '#df361c' : 'white')}}
                                 onBlur={handleBlur('email')}
                                 onChangeText={handleChange('senha')}/>
                             { errors.senha && touched.senha && <Text style={styles.fail}>{errors.senha}</Text>}
@@ -110,12 +110,13 @@ const styles = StyleSheet.create ({
 
    input: {
 	padding: 15,
+    marginTop: 10,
    },
 
    button:{
     backgroundColor: '#0059A7',
     borderRadius: 20,
-    marginTop: 5,
+    marginTop: 10,
     width: 200,
    },
 
@@ -134,7 +135,7 @@ const styles = StyleSheet.create ({
 
    fail: {
     textAlign:'center',
-    color: 'red',
-    fontSize: 15
+    color: '#df361c',
+    fontSize: 15,
   },
 })
