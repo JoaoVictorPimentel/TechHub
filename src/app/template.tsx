@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'reac
 import {Button, Icon} from '@rneui/themed';
 import { Input } from '@rneui/base';
 import { router } from 'expo-router';
+import {DrawerToggleButton} from '@react-navigation/drawer'; 
 
 export interface TemplateProps {
     children: any;
@@ -15,6 +16,8 @@ export default function Template (props: TemplateProps) {
             {/* HEADER */}
             <View style={styles.header}>
                 <View style={styles.headerItens}> 
+                <DrawerToggleButton>
+                </DrawerToggleButton>
                     <Button onPress={() => router.push('/login')} icon={{name: 'menu', color: 'white'}} type='clear'/>
                     <TouchableOpacity onPress={() => router.push('')}>
                         <Image style={styles.logo} source={require('./../assets/imgs/logo.png')}/>
