@@ -24,7 +24,7 @@ export default function LoginScreen (){
             <View style={styles.background}>
                 <View style={{alignItems: 'center', marginTop: '30%'}}>
                     <View style={styles.boxLogin}>
-                        <Image style={styles.logo} source={require('./../../assets/imgs/TH2.png')}/>
+                        <Image style={styles.logo} source={require('./../../../assets/imgs/TH2.png')}/>
                         <Text style= {styles.subtitle}>Bem vindo de volta a TechHub, faça seu login e vamos as compras!</Text>
                     </View>
                 </View>            
