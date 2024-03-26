@@ -6,7 +6,7 @@ export interface MainProps {
 
 export default function Main (props: MainProps) {
     return (
-        <Text>teste</Text>
+        <Text>Main</Text>
     );
 }
 

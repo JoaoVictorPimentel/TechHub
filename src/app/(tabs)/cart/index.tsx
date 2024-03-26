@@ -7,7 +7,7 @@ export interface AppProps {
 export default function App (props: AppProps) {
     return (
       <View>
-         <Text>App</Text>
+         <Text>Carrinho</Text>
       </View>
     );
 }
