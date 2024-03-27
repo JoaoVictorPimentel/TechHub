@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet} from 'react-native';
-import {Button} from '@rneui/themed';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { Button } from '@rneui/themed';
 import MyButton from './button';
 
 
@@ -8,66 +8,59 @@ export interface CardProps {
     image: 'string'
 }
 
-export default function Card (props: CardProps) {
+export default function Card(props: CardProps) {
     return (
-    <View style={{alignItems: 'center'}}>
         <View style={styles.card}>
-            <Image style={styles.itemImage} source={require('./../assets/imgs/g733.png')}/>
-        
-            <View style={styles.valueView}>
-                <Text style={styles.title}>Logitech G733 Wireless</Text>
-                <Text style={styles.value}>R$899,99</Text>
+            <Image style={styles.imageCard} source={require('./../assets/imgs/g733.png')} />
+            
+            <View style={{flexDirection: 'column', padding: 6}}> 
+                <Text style={styles.titleCard}>Logitech g733</Text>
+                <Text style={styles.promoValue}>R$999,99</Text>
+                <Text style={styles.value}>799,99 no PIX</Text>
+                <View style={{flexDirection: 'row', marginTop: 8,}}>
+                    <Text style={styles.portion}>899,99</Text>
+                    <Text style={styles.portionText}>Em até 12x</Text>
+                </View>
+
             </View>
-            <View style={{marginTop: 15}}>
-                <MyButton></MyButton>
-            </View>
-        </View>       
-    </View>
+        </View>
     );
 }
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     card: {
         backgroundColor: '#111',
-        width: '90%',
-        height: 360,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 20,
+        width: 300,
+        height: 170,
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-
-    itemImage: {
-        width: 200,
-        height: 200
+    imageCard: {
+        width: 120,
+        height: 120
     },
-
-    valueView:{
-        backgroundColor: '#222',
-        width: 280,
-        height: 65,
-        padding: 3,
-        borderRadius: 10
+    titleCard: {
+        fontSize: 21,
+        color: 'white'
     },
-
-    title: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 18,
-        marginTop: 3
+    promoValue: {
+        fontSize: 13,
+        textDecorationLine: 'line-through',
+        color: '#0059A7',
+        marginTop: 8
     },
-    
     value: {
         color: 'white',
-        textAlign: 'center',
-        fontSize: 17,
-        padding: 10
+        fontSize: 15, 
+        marginTop: 5
+    }, 
+    portion: {
+        fontSize: 13,
+        color: '#0059A7',
     },
-
-    buttonStyle: {
-        padding: 5
+    portionText: {
+        fontSize: 13,
+        color: 'grey',
+        marginLeft: 4
     }
 })
