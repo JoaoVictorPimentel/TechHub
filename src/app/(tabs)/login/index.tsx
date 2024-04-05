@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, Image, ScrollView} from 'react-native';
+import { View, StyleSheet, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import {Button, Input} from '@rneui/themed';
 import { router } from 'expo-router';
 import { Formik } from 'formik';
@@ -72,7 +72,9 @@ export default function LoginScreen (){
                     )}                                      
                 </Formik>
 
-                <Text style={styles.register}>Cadastre-se</Text>
+                <TouchableOpacity onPress={() => router.push('/login/register')}>
+                    <Text style={styles.register}>Cadastre-se</Text>
+                </TouchableOpacity>
                 <Text style={styles.register}>Esqueceu sua senha?</Text>
             </View>
         </ScrollView>

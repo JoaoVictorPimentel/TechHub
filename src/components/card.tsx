@@ -1,29 +1,38 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button } from '@rneui/themed';
-import MyButton from './button';
-
+import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 
 export interface CardProps {
-    image: 'string'
+    valor: {image: any, name: string, promoValue: Float, value: Float, valuePortion: Float}
 }
 
-export default function Card(props: CardProps) {
+export default function Card({valor}: CardProps) {
     return (
-        <View style={styles.card}>
-            <Image style={styles.imageCard} source={require('./../assets/imgs/g733.png')} />
+        <TouchableOpacity>
+            <View style={styles.card}>
+            <Image style={styles.imageCard} source={valor.image} />
             
             <View style={{flexDirection: 'column', padding: 6}}> 
-                <Text style={styles.titleCard}>Logitech g733</Text>
-                <Text style={styles.promoValue}>R$999,99</Text>
-                <Text style={styles.value}>799,99 no PIX</Text>
+                <Text style={styles.titleCard}>{valor.name}</Text>
                 <View style={{flexDirection: 'row', marginTop: 8,}}>
-                    <Text style={styles.portion}>899,99</Text>
+                    <Text style={styles.promoValue}>R$</Text>
+                    <Text style={styles.promoValue}>{valor.promoValue}</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginTop: 8,}}>
+                    <Text style={styles.value}>R$</Text>
+                    <Text style={styles.value}>{valor.value}</Text>
+                    <Text style={styles.pix}>no PIX</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginTop: 8,}}>
+                    <Text style={styles.portion}>R$</Text>
+                    <Text style={styles.portion}>{valor.valuePortion}</Text>
                     <Text style={styles.portionText}>Em até 12x</Text>
                 </View>
 
             </View>
         </View>
+        </TouchableOpacity>
     );
 }
 
@@ -33,7 +42,8 @@ const styles = StyleSheet.create({
         width: 300,
         height: 170,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginLeft: 15
     },
     imageCard: {
         width: 120,
@@ -53,6 +63,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15, 
         marginTop: 5
+    }, 
+    pix: {
+        color: 'white',
+        fontSize: 15, 
+        marginTop: 5,
+        marginLeft: 3
     }, 
     portion: {
         fontSize: 13,
