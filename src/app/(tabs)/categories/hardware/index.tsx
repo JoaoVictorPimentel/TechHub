@@ -26,7 +26,7 @@ export default function App(props: AppProps) {
         <View style={{alignItems: 'center'}}>
           <View style={styles.categories}>
             <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+              <TouchableOpacity onPress={() => router.push('/categories/hardware/placas')} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
                 <Text style={styles.textCategorie}>Placas de vídeo</Text>
                 <Icon name='arrow-right' type='font-awesome' color='white' />
               </TouchableOpacity>
