@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
-import { router } from 'expo-router';
 
 export interface CardProps {
     valor: {image: any, name: string, promoValue: Float, value: Float, valuePortion: Float}

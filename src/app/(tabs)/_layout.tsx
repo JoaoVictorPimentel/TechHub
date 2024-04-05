@@ -8,7 +8,11 @@ export interface LayoutProps {
 export default function Layout () {
     return (
       <Tabs screenOptions={{ headerShown: false,
-        tabBarStyle: {backgroundColor: '#111', borderTopRightRadius: 15, borderTopLeftRadius: 15}
+        tabBarStyle: {backgroundColor: '#111', 
+        borderTopRightRadius: 27, 
+        borderTopLeftRadius: 27,
+        height: 80
+      }
       }}>
         <Tabs.Screen name='(main)/index' options={{
           title: 'Home',
