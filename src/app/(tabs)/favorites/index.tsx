@@ -9,8 +9,8 @@ export default function App() {
       <Bar></Bar>
 
       <View style={styles.cart}>
-        <FontAwesome name='shopping-cart' size={40} color={'gray'} />
-        <Text style={styles.text}>Seu carrinho está vazio</Text>
+        <FontAwesome name='heart' size={40} color={'gray'} />
+        <Text style={styles.text}>Você não possui nenhum item</Text>
       </View>
     </View>
   );

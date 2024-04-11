@@ -1,36 +1,46 @@
 import * as React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
+import { useShopContext } from '../providers/shop';
+import { router } from 'expo-router';
 
 export interface CardProps {
-    valor: {image: any, name: string, promoValue: Float, value: Float, valuePortion: Float}
+    valor: { image: any, name: string, promoValue: Float, value: Float, valuePortion: Float }
 }
 
-export default function Card({valor}: CardProps) {
-    return (
-        <TouchableOpacity>
-            <View style={styles.card}>
-            <Image style={styles.imageCard} source={valor.image} />
-            
-            <View style={{flexDirection: 'column', padding: 6}}> 
-                <Text style={styles.titleCard}>{valor.name}</Text>
-                <View style={{flexDirection: 'row', marginTop: 8,}}>
-                    <Text style={styles.promoValue}>R$</Text>
-                    <Text style={styles.promoValue}>{valor.promoValue}</Text>
-                </View>
-                <View style={{flexDirection: 'row', marginTop: 8,}}>
-                    <Text style={styles.value}>R$</Text>
-                    <Text style={styles.value}>{valor.value}</Text>
-                    <Text style={styles.pix}>no PIX</Text>
-                </View>
-                <View style={{flexDirection: 'row', marginTop: 8,}}>
-                    <Text style={styles.portion}>R$</Text>
-                    <Text style={styles.portion}>{valor.valuePortion}</Text>
-                    <Text style={styles.portionText}>Em até 12x</Text>
-                </View>
+export default function Card({ valor }: CardProps) {
+    const { setProduct } = useShopContext();
 
+    // ===========================================
+    const handleOpenProduct = () => {
+        setProduct(valor)
+        router.push('/categories/products/');
+    }
+    // ===========================================
+
+    return (
+        <TouchableOpacity onPress={handleOpenProduct}>
+            <View style={styles.card}>
+                <Image style={styles.imageCard} source={valor.image} />
+
+                <View style={{ flexDirection: 'column', padding: 10}}>
+                    <Text style={styles.titleCard}>{valor.name}</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 8, }}>
+                        <Text style={styles.promoValue}>R$</Text>
+                        <Text style={styles.promoValue}>{valor.promoValue}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', marginTop: 8, }}>
+                        <Text style={styles.value}>R$</Text>
+                        <Text style={styles.value}>{valor.value}</Text>
+                        <Text style={styles.pix}>no PIX</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', marginTop: 8, }}>
+                        <Text style={styles.portion}>R$</Text>
+                        <Text style={styles.portion}>{valor.valuePortion}</Text>
+                        <Text style={styles.portionText}>Em até 12x</Text>
+                    </View>
+                </View>
             </View>
-        </View>
         </TouchableOpacity>
     );
 }
@@ -38,15 +48,18 @@ export default function Card({valor}: CardProps) {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#111',
-        width: 300,
-        height: 170,
+        width: 350,
+        height: 200,
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: 15
+        marginLeft: 15,
+        borderRadius: 5,
+        marginTop: 15
     },
     imageCard: {
-        width: 120,
-        height: 120
+        width: 140,
+        height: 140,
+        marginLeft: 15
     },
     titleCard: {
         fontSize: 21,
@@ -60,15 +73,13 @@ const styles = StyleSheet.create({
     },
     value: {
         color: 'white',
-        fontSize: 15, 
-        marginTop: 5
-    }, 
+        fontSize: 15,
+    },
     pix: {
         color: 'white',
-        fontSize: 15, 
-        marginTop: 5,
+        fontSize: 15,
         marginLeft: 3
-    }, 
+    },
     portion: {
         fontSize: 13,
         color: '#0059A7',

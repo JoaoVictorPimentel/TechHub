@@ -14,7 +14,7 @@ export default function BannerPromo (props: BannerPromoProps) {
 
 const styles = StyleSheet.create ({
     banner: {
-        width: '98%',
+        width: '95%',
         height: 220,
         borderRadius: 10,
         alignItems: 'center',

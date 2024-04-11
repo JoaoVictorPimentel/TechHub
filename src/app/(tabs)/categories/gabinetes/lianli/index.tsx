@@ -10,18 +10,19 @@ export interface AppProps {
 
 export default function App(props: AppProps) {
     const vetor = [
-        { image: require('../../../../../assets/imgs/placa.png'), name: 'RTX 4090', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 },
-        { image: require('../../../../../assets/imgs/6600.png'), name: 'RX 6600', promoValue: 1299.99, value: 1049.99, valuePortion: 1199.99 },
-        { image: require('../../../../../assets/imgs/3070.png'), name: 'RTX 3070 TI', promoValue: 1599.99, value: 1299.99, valuePortion: 1399.99 },
-        { image: require('../../../../../assets/imgs/7700.png'), name: 'RX 7700 XT', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 },
+        { image: require('../../../../../assets/imgs/o11-vision.png'), name: 'O11 Vision', promoValue: 1199.99, value: 899.99, valuePortion: 999.99 },
+        { image: require('../../../../../assets/imgs/o11-dynamic.png'), name: 'O11 Dynamic', promoValue: 999.99, value: 749.99, valuePortion: 849.99 },
+        { image: require('../../../../../assets/imgs/dynamic-mini.png'), name: 'Dynamic Mini', promoValue: 949.99, value: 699.99, valuePortion: 799.99 },
+        { image: require('../../../../../assets/imgs/o11-vision-branco.png'), name: 'O11 Vision Branco', promoValue: 1199.99, value: 899.99, valuePortion: 999.99 },
     ]
     return (
+
         <View style={styles.main}>
             <Bar></Bar>
 
             <View style={styles.categoria}>
-                <Text style={styles.title}>Placas de vídeo</Text>
-                <TouchableOpacity style={{ flexDirection: 'row', marginTop: 32 }} onPress={() => router.push('/categories/hardware')}>
+                <Text style={styles.title}>Gabinetes</Text>
+                <TouchableOpacity style={{ flexDirection: 'row', marginTop: 32 }} onPress={() => router.push('/categories/gabinetes')}>
                     <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
                     <Text style={styles.voltar}>Voltar</Text>
                 </TouchableOpacity>
@@ -38,7 +39,6 @@ export default function App(props: AppProps) {
 
             </View>
         </View>
-
     );
 }
 

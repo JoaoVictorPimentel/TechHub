@@ -14,13 +14,13 @@ export default function LoginScreen (){
         await new Promise((resolve, error) => setTimeout(() => resolve(), 1000))
       
         if (email.trim() == 'admin@gmail.com' && senha.trim() == '12345678') 
-            router.push('')
+            router.push('login/user')
         else
             setResultado('falhou')
     }
     
     return (
-        <ScrollView>
+        <ScrollView style={{flex: 1}}>
             <View style={styles.background}>
                 <View style={{alignItems: 'center', marginTop: '30%'}}>
                     <View style={styles.boxLogin}>
@@ -61,7 +61,7 @@ export default function LoginScreen (){
                                 <Button
                                     buttonStyle={styles.button} 
                                     type='clear' 
-                                    titleStyle={{color: 'white', backgroundColor: ''}} 
+                                    titleStyle={{color: 'white'}} 
                                     title="Entrar"
                                     onPress={() => handleSubmit()} 
                                     disabled={isSubmitting}/>
@@ -84,8 +84,7 @@ export default function LoginScreen (){
 const styles = StyleSheet.create ({
    background: {
     backgroundColor: '#222',
-    width: '100%',
-    height: 1000
+    height: 850
    },
 
    boxLogin: {

@@ -27,7 +27,7 @@ export default function App(props: AppProps) {
 
           <View style={styles.categories}>
             <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+              <TouchableOpacity onPress={() => router.push('/categories/gabinetes/lianli')} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
                 <Text style={styles.textCategorie}>LianLi</Text>
                 <Icon name='arrow-right' type='font-awesome' color='white' />
               </TouchableOpacity>

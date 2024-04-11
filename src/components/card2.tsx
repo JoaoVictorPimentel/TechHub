@@ -1,18 +1,28 @@
 import * as React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
+import { useShopContext } from '../providers/shop';
+import { router } from 'expo-router';
 
 export interface Card2Props {
     valor: {image: any, name: string, promoValue: Float, value: Float, valuePortion: Float}
 }
 
 export default function Card2({valor}: Card2Props) {
+    const { setProduct } = useShopContext();
+
+    // ===========================================
+    const handleOpenProduct = () => {
+        setProduct(valor)
+        router.push('/categories/products/');
+    }
+    // ===========================================
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleOpenProduct}>
             <View style={styles.card}>
                 <Image style={styles.imageCard} source={valor.image} />
                 
-                <View style={{flexDirection: 'column', padding: 30}}> 
+                <View style={{flexDirection: 'column', padding: 10}}> 
                     <Text style={styles.titleCard}>{valor.name}</Text>
                     <View style={{flexDirection: 'row', marginTop: 8,}}>
                         <Text style={styles.promo}>De R$</Text>
@@ -38,19 +48,20 @@ export default function Card2({valor}: Card2Props) {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#111',
-        width: 350,
-        height: 200,
+        width: 370,
+        height: 250,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 20,
+        borderRadius: 5
     },
     imageCard: {
-        width: 140,
-        height: 140,
+        width: 160,
+        height: 160,
         marginLeft: 15
     },
     titleCard: {
-        fontSize: 21,
+        fontSize: 25,
         color: 'white'
     },
     promo: {
@@ -66,17 +77,16 @@ const styles = StyleSheet.create({
     },
     value: {
         color: 'white',
-        fontSize: 15, 
-        marginTop: 5
+        fontSize: 17, 
     }, 
     pix: {
         color: 'white',
         fontSize: 15, 
-        marginTop: 5,
+        marginTop: 1,
         marginLeft: 3
     }, 
     portion: {
-        fontSize: 13,
+        fontSize: 14,
         color: '#0059A7',
     },
     portionText: {
