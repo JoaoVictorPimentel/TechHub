@@ -20,71 +20,79 @@ export default function LoginScreen (){
     }
     
     return (
-        <ScrollView style={{flex: 1}}>
-            <View style={styles.background}>
-                <View style={{alignItems: 'center', marginTop: '30%'}}>
-                    <View style={styles.boxLogin}>
-                        <Image style={styles.logo} source={require('./../../../assets/imgs/TH2.png')}/>
-                        <Text style= {styles.subtitle}>Bem vindo de volta a TechHub, faça seu login e vamos as compras!</Text>
-                    </View>
-                </View>            
+        <View style={{flex: 1, backgroundColor: '#222'}}>
 
-                <Formik
-                    initialValues={{email: '', senha: ''}}
-                    validationSchema={Yup.object().shape({
-                      email: Yup.string().required('Informe o email').email('E-mail não é válido'),
-                      senha: Yup.string().required('Informe a senha').min(8, 'A senha precisa ter 8 caracteres')
-                    })}
-                    onSubmit={handleLogin}
-                >
-                    {({errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting}) => (
-                        <>
-                            <Input style={styles.input}
-                                placeholder='Digite seu Email' 
-                                leftIcon={{name:'person', color: (errors.email ? '#df361c' : 'white')}} 
-                                inputStyle={{color: (errors.email ? '#df361c' : 'white')}}
-                                onBlur={handleBlur('email')}
-                                onChangeText={handleChange('email')}/>
-                            { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
+            <ScrollView style={{flex: 1}}>
+                <View style={styles.background}>
+                    <View style={{alignItems: 'center', marginTop: '30%'}}>
+                        <View style={styles.boxLogin}>
+                            <Image style={styles.logo} source={require('./../../../assets/imgs/TH2.png')}/>
+                            <Text style= {styles.subtitle}>Bem vindo de volta a TechHub, faça seu login e vamos as compras!</Text>
+                        </View>
+                    </View>            
 
-                            <Input style={styles.input}
-                                secureTextEntry
-                                placeholder='Digite sua senha' 
-                                leftIcon={{name:'lock', color: (errors.senha ? '#df361c' : 'white')}}
-                                inputStyle={{color: (errors.senha ? '#df361c' : 'white')}}
-                                onBlur={handleBlur('email')}
-                                onChangeText={handleChange('senha')}/>
-                            { errors.senha && touched.senha && <Text style={styles.fail}>{errors.senha}</Text>}
+                    <Formik
+                        initialValues={{email: '', senha: ''}}
+                        validationSchema={Yup.object().shape({
+                        email: Yup.string().required('Informe o email').email('E-mail não é válido'),
+                        senha: Yup.string().required('Informe a senha').min(8, 'A senha precisa ter 8 caracteres')
+                        })}
+                        onSubmit={handleLogin}
+                    >
+                        {({values, errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting}) => (
+                            <>
+                                <Input style={styles.input}
+                                    placeholder='Digite seu Email' 
+                                    leftIcon={{name:'person', color: (errors.email ? '#df361c' : 'white')}} 
+                                    inputStyle={{color: (errors.email ? '#df361c' : 'white')}}
+                                    value={values.email}
+                                    onBlur={handleBlur('email')}
+                                    onChangeText={handleChange('email')}/>
+                                { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
+
+                                <Input style={styles.input}
+                                    secureTextEntry
+                                    placeholder='Digite sua senha' 
+                                    value={values.senha}
+                                    leftIcon={{name:'lock', color: (errors.senha ? '#df361c' : 'white')}}
+                                    inputStyle={{color: (errors.senha ? '#df361c' : 'white')}}
+                                    onBlur={handleBlur('senha')}
+                                    onChangeText={handleChange('senha')}/>
+                                { errors.senha && touched.senha && <Text style={styles.fail}>{errors.senha}</Text>}
 
 
-                            <View style={{alignItems: 'center'}}> 
-                                <Button
-                                    buttonStyle={styles.button} 
-                                    type='clear' 
-                                    titleStyle={{color: 'white'}} 
-                                    title="Entrar"
-                                    onPress={() => handleSubmit()} 
-                                    disabled={isSubmitting}/>
-                            </View>
+                                <View style={{alignItems: 'center'}}> 
+                                    <Button
+                                        buttonStyle={styles.button} 
+                                        type='clear' 
+                                        titleStyle={{color: 'white'}} 
+                                        title="Entrar"
+                                        onPress={() => handleSubmit()} 
+                                        disabled={isSubmitting}/>
+                                </View>
 
-                            { resultado == 'falhou' && <Text style={styles.fail}>Email ou senha incorretos</Text>}
-                        </>
-                    )}                                      
-                </Formik>
+                                { resultado == 'falhou' && <Text style={styles.fail}>Email ou senha incorretos</Text>}
+                            </>
+                        )}                                      
+                    </Formik>
 
-                <TouchableOpacity onPress={() => router.push('/login/register')}>
-                    <Text style={styles.register}>Cadastre-se</Text>
-                </TouchableOpacity>
-                <Text style={styles.register}>Esqueceu sua senha?</Text>
-            </View>
-        </ScrollView>
+                    <TouchableOpacity onPress={() => router.push('/login/register')}>
+                        <Text style={styles.register}>Cadastre-se</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push('/login/password')}>
+                        <Text style={styles.register}>Esqueceu sua senha?</Text>
+                    </TouchableOpacity>
+                    
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create ({
    background: {
     backgroundColor: '#222',
-    height: 850
+    marginBottom: 80
    },
 
    boxLogin: {

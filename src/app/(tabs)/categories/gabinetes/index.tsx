@@ -9,51 +9,54 @@ export interface AppProps {
 
 export default function App(props: AppProps) {
   return (
-    <ScrollView style={{ backgroundColor: '#222' }}>
-      <View style={styles.main}>
-        <Bar></Bar>
+    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
 
-        <Text style={styles.title}>Categorias</Text>
+      <ScrollView style={{ backgroundColor: '#222' }}>
+        <View style={styles.main}>
+          <Bar></Bar>
 
-        <View style={styles.categoria}>
-          <Text style={styles.title2}>Gabinetes</Text>
-          <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
-            <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
-            <Text style={styles.voltar}>Voltar</Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={styles.title}>Categorias</Text>
 
-        <View style={{ alignItems: 'center' }}>
+          <View style={styles.categoria}>
+            <Text style={styles.title2}>Gabinetes</Text>
+            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
+              <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
+              <Text style={styles.voltar}>Voltar</Text>
+            </TouchableOpacity>
+          </View>
 
-          <View style={styles.categories}>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity onPress={() => router.push('/categories/gabinetes/lianli')} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>LianLi</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>NZXT</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Redragon</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={{ padding: 5 }}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>CoolerMaster</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
+          <View style={{ alignItems: 'center' }}>
+
+            <View style={styles.categories}>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity onPress={() => router.push('/categories/gabinetes/lianli')} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>LianLi</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>NZXT</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Redragon</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={{ padding: 5 }}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>CoolerMaster</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

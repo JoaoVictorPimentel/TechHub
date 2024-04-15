@@ -9,63 +9,65 @@ export interface AppProps {
 
 export default function App(props: AppProps) {
   return (
-    <ScrollView style={{ backgroundColor: '#222' }}>
-      <View style={styles.main}>
-        <Bar></Bar>
+    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+      <ScrollView style={{ backgroundColor: '#222' }}>
+        <View style={styles.main}>
+          <Bar></Bar>
 
-        <Text style={styles.title}>Categorias</Text>
+          <Text style={styles.title}>Categorias</Text>
 
-        <View style={styles.categoria}>
-          <Text style={styles.title2}>Monitores</Text>
-          <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
-            <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
-            <Text style={styles.voltar}>Voltar</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.categoria}>
+            <Text style={styles.title2}>Monitores</Text>
+            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
+              <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
+              <Text style={styles.voltar}>Voltar</Text>
+            </TouchableOpacity>
+          </View>
 
-        <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: 'center' }}>
 
-          <View style={styles.categories}>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>LG</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Sansumg</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>AOC</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Alienware</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Acer</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={{ padding: 5 }}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Mancer</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
+            <View style={styles.categories}>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>LG</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Sansumg</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>AOC</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Alienware</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Acer</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={{ padding: 5 }}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Mancer</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

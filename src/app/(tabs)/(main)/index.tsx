@@ -20,41 +20,41 @@ export default function Main() {
         { image: require('../../../assets/imgs/placa.png'), name: 'RTX 4090', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 }
     ]
     return (
-        <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
-            {/* PESQUISA */}
-            <Bar></Bar>
+        <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+            <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
+                {/* PESQUISA */}
+                <Bar></Bar>
 
-            {/* MAIN */}
-            <Banner></Banner>
+                {/* MAIN */}
+                <Banner></Banner>
 
-            <Text style={styles.title}>Lançamentos</Text>
+                <Text style={styles.title}>Lançamentos</Text>
 
-            <View>
-                <ScrollView>
-                    <FlatList
-                        data={vetor}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={({ item, index }) => (
-                            <Card valor={item} key={index} />
-                        )}
-                    />
-                </ScrollView>
-            </View>
+                <View>
+                    <ScrollView>
+                        <FlatList
+                            data={vetor}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item, index }) => (
+                                <Card valor={item} key={index} />
+                            )}
+                        />
+                    </ScrollView>
+                </View>
 
-            <BannerPromo></BannerPromo>
+                <BannerPromo></BannerPromo>
 
-            <Text style={styles.title}>Promoções</Text>
+                <Text style={styles.title}>Promoções</Text>
 
-            <View style={{marginLeft: '3%'}}>
-                <FlatList
-                    data={vetor2}
-                    renderItem={({ item, index }) => (
+                <View style={{ marginLeft: '3%' }}>
+                    {vetor2.map((item, index) => (
                         <Card2 valor={item} key={index} />
-                    )}
-                />
-            </View>
-        </ScrollView>
+                    ))}
+
+                </View>
+            </ScrollView>
+        </View>
     );
 }
 
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     main: {
         backgroundColor: '#222',
         flex: 1,
+        marginBottom: 20
     },
     title: {
         color: '#fff',

@@ -16,26 +16,29 @@ export default function App(props: AppProps) {
         { image: require('../../../../../assets/imgs/7700.png'), name: 'RX 7700 XT', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 },
     ]
     return (
-        <View style={styles.main}>
-            <Bar></Bar>
+        <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
 
-            <View style={styles.categoria}>
-                <Text style={styles.title}>Placas de vídeo</Text>
-                <TouchableOpacity style={{ flexDirection: 'row', marginTop: 32 }} onPress={() => router.push('/categories/hardware')}>
-                    <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
-                    <Text style={styles.voltar}>Voltar</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: 'center', marginTop: '7%' }}>
+            <View style={styles.main}>
+                <Bar></Bar>
 
-                <FlatList
-                    data={vetor}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item, index }) => (
-                        <Card2 valor={item} key={index} />
-                    )}
-                />
+                <View style={styles.categoria}>
+                    <Text style={styles.title}>Placas de vídeo</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row', marginTop: 32 }} onPress={() => router.push('/categories/hardware')}>
+                        <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
+                        <Text style={styles.voltar}>Voltar</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ alignItems: 'center', marginTop: '7%' }}>
 
+                    <FlatList
+                        data={vetor}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={({ item, index }) => (
+                            <Card2 valor={item} key={index} />
+                        )}
+                    />
+
+                </View>
             </View>
         </View>
 
@@ -45,7 +48,8 @@ export default function App(props: AppProps) {
 const styles = StyleSheet.create({
     main: {
         backgroundColor: '#222',
-        flex: 1
+        flex: 1,
+        marginBottom: 180
     },
     title: {
         color: 'white',

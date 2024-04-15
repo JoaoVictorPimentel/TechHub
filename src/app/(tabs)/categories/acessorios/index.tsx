@@ -9,62 +9,65 @@ export interface AppProps {
 
 export default function App(props: AppProps) {
   return (
-    <ScrollView style={{backgroundColor: '#222'}}>
-      <View style={styles.main}>
-        <Bar></Bar>
+    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+      <ScrollView style={{backgroundColor: '#222'}}>
+        <View style={styles.main}>
+          <Bar></Bar>
 
-        <Text style={styles.title}>Categorias</Text>
+          <Text style={styles.title}>Categorias</Text>
 
-        <View style={styles.categoria}>
-          <Text style={styles.title2}>Acessórios</Text>
-          <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
-            <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
-            <Text style={styles.voltar}>Voltar</Text>
-          </TouchableOpacity>
+          <View style={styles.categoria}>
+            <Text style={styles.title2}>Acessórios</Text>
+            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
+              <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
+              <Text style={styles.voltar}>Voltar</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{alignItems: 'center'}}>
+            <View style={styles.categories}>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Cabos USB</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Cabos USB C</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Hub USB</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Suporte para Headset</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.itemCategorie}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Limpa telas</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={{padding: 5 }}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+                  <Text style={styles.textCategorie}>Keycaps</Text>
+                  <Icon name='arrow-right' type='font-awesome' color='white' />
+                </TouchableOpacity>
+              </View>
+              </View>
+          </View>
         </View>
-
-        <View style={{alignItems: 'center'}}>
-          <View style={styles.categories}>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Cabos USB</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Cabos USB C</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Hub USB</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Suporte para Headset</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.itemCategorie}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Limpa telas</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            <View style={{padding: 5 }}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
-                <Text style={styles.textCategorie}>Keycaps</Text>
-                <Icon name='arrow-right' type='font-awesome' color='white' />
-              </TouchableOpacity>
-            </View>
-            </View>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      
+    </View>
   );
 }
 

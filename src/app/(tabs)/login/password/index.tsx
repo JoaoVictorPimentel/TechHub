@@ -1,59 +1,36 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Input } from '@rneui/themed';
 import { router } from 'expo-router';
 
-export default function RegisterScreen() {
+export default function App() {
     return (
-        <View style={{flex: 1, backgroundColor: '#222'}}>
+        <View style={{ flex: 1, backgroundColor: '#222' }}>
 
-            <ScrollView style={{flex: 1}}>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={styles.background}>
                     <View style={{ alignItems: 'center', marginTop: '30%' }}>
                         <View style={styles.boxLogin}>
                             <Image style={styles.logo} source={require('./../../../../assets/imgs/TH2.png')} />
-                            <Text style={styles.subtitle}>Bem vindo de volta a TechHub, cadastre-se para poder adquirir os melhores produtos do mercado!</Text>
+                            <Text style={styles.subtitle}>Vamos recuperar sua senha, para isso nos informe o email cadastrado e iremos enviar um link para alteração</Text>
                         </View>
                     </View>
+                    <Input style={styles.input}
+                        placeholder='Informe o email cadastrado'
+                        leftIcon={{ name: 'person', color: 'white' }} />
 
-                    <Input style={styles.input}
-                        placeholder='Informe seu nome completo'
-                        leftIcon={{ name: 'person', color: 'white'}}/>
-
-                    <Input style={styles.input}
-                        placeholder='Informe seu CPF'
-                        leftIcon={{ name: 'person', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        placeholder='Data de Nascimento'
-                        leftIcon={{ name: 'cake', type: 'materialIcons', color: 'white'}}/>
-                
-                    <Input style={styles.input}
-                        placeholder='Digite seu Email'
-                        leftIcon={{ name: 'email',type: 'fontisto', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        secureTextEntry
-                        placeholder='Digite sua senha'
-                        leftIcon={{ name: 'lock', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        secureTextEntry
-                        placeholder='Confirme sua senha'
-                        leftIcon={{ name: 'lock', color: 'white'}}/>
-    
-                    <View style={{alignItems: 'center'}}>
+                    <View style={{ alignItems: 'center' }}>
                         <TouchableOpacity style={styles.button} onPress={() => router.push('/login')}>
-                            <Text style={{color: 'white', fontSize: 16}}>Criar conta</Text>
+                            <Text style={{ color: 'white', fontSize: 16 }}>Recuperar senha</Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={() => router.push('/login')}>
-                        <Text style={styles.register}>Já possui uma conta? Entrar</Text>
+                        <Text style={styles.register}>Já recuperou? Entrar</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

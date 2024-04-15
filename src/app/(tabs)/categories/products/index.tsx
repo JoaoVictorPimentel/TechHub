@@ -1,65 +1,75 @@
 import * as React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
 import { useShopContext } from './../../../../providers/shop';
 import { router } from 'expo-router';
 import Bar from '../../../../components/searchBar';
 import { Icon } from '@rneui/themed';
+import Toast from 'react-native-toast-message';
 
 export default function Product() {
+    const showToast = () => {
+        Toast.show({
+            type: 'success',
+            text1: 'Item adicionado ao carrinho',
+        });
+    }
     const { product } = useShopContext();
+
     return (
-        <ScrollView style={{ backgroundColor: '#222', flex: 1 }}>
-            <View>
-                <Bar></Bar>
+        <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+            <ScrollView>
+                <View>
+                    <Bar></Bar>
 
-                <View style={styles.top}>
-                    <View style={{ flexDirection: 'row', padding: 7 }}>
-                        <Icon name='external-link' type='font-awesome' color={'white'} size={24} style={{ marginTop: 10 }} />
-                        <Icon name='heart-outlined' type='entypo' color={'white'} size={27} style={{ marginTop: 7, marginLeft: 5 }} />
-                    </View>
-                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.push('/categories')}>
-                        <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 17 }} />
-                        <Text style={styles.voltar}>Voltar</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.imageView}>
-                    <Image style={styles.image} source={product?.image} />
-                </View>
-                <View style={styles.info}>
-                    <View style={styles.infoItem}>
-                        <Text style={styles.name}>{product?.name}</Text>
-                    </View>
-                    <View style={styles.infoItem}>
-                        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                            <Text style={{ color: 'white' }}>HCL1-223</Text>
-                            <Text style={{ color: '#0059A7' }}>Produto disponível</Text>
+                    <View style={styles.top}>
+                        <View style={{ flexDirection: 'row', padding: 7 }}>
+                            <Icon name='external-link' type='font-awesome' color={'white'} size={24} style={{ marginTop: 10 }} />
+                            <Icon name='heart-outlined' type='entypo' color={'white'} size={27} style={{ marginTop: 7, marginLeft: 5 }} />
                         </View>
+                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.push('/categories')}>
+                            <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 17 }} />
+                            <Text style={styles.voltar}>Voltar</Text>
+                        </TouchableOpacity>
                     </View>
-                </View>
-                <View style={styles.valueView}>
-                    <View style={styles.values}>
-                        <View style={styles.valueItem}>
-                            <View>
-                                <Text style={styles.promo}>R${product?.promoValue}</Text>
-                                <Text style={{ color: 'gray', fontSize: 17 }}>No PIX com desconto</Text>
+                    <View style={styles.imageView}>
+                        <Image style={styles.image} source={product?.image} />
+                    </View>
+                    <View style={styles.info}>
+                        <View style={styles.infoItem}>
+                            <Text style={styles.name}>{product?.name}</Text>
+                        </View>
+                        <View style={styles.infoItem}>
+                            <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+                                <Text style={{ color: 'white' }}>HCL1-223</Text>
+                                <Text style={{ color: '#0059A7' }}>Produto disponível</Text>
                             </View>
-                            <Text style={styles.value}>R$ {product?.value}</Text>
-                        </View>
-                        <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 20, width: '90%' }}>
-                            <Text style={{ color: 'gray', fontSize: 17 }}>Em 12x sem juros no cartão</Text>
-                            <Text style={styles.value}>R$ {product?.valuePortion}</Text>
                         </View>
                     </View>
-                </View>
+                    <View style={styles.valueView}>
+                        <View style={styles.values}>
+                            <View style={styles.valueItem}>
+                                <View>
+                                    <Text style={styles.promo}>R${product?.promoValue}</Text>
+                                    <Text style={{ color: 'gray', fontSize: 17 }}>No PIX com desconto</Text>
+                                </View>
+                                <Text style={styles.value}>R$ {product?.value}</Text>
+                            </View>
+                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 20, width: '90%' }}>
+                                <Text style={{ color: 'gray', fontSize: 17 }}>Em 12x sem juros no cartão</Text>
+                                <Text style={styles.value}>R$ {product?.valuePortion}</Text>
+                            </View>
+                        </View>
+                    </View>
 
-                <View style={{alignItems: 'center', marginTop: 20}}>
-                    <TouchableOpacity style={styles.btn}>
-                        <Icon name='cart-plus' type='font-awesome' color={'white'} size={24} />
-                        <Text style={styles.buy}>Comprar</Text>
-                    </TouchableOpacity>
+                    <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <TouchableOpacity style={styles.btn} onPress={showToast}>
+                            <Icon name='cart-plus' type='font-awesome' color={'white'} size={24} />
+                            <Text style={styles.buy}>Comprar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through'
     },
     value: {
-        color: '#0059A7',
+        color: 'white',
         fontSize: 23
     },
     btn: {
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row'
     },
-    buy : {
+    buy: {
         fontSize: 24,
         color: 'white',
         marginLeft: 6

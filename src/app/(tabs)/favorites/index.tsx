@@ -5,12 +5,14 @@ import Bar from '../../../components/searchBar';
 
 export default function App() {
   return (
-    <View style={styles.main}>
-      <Bar></Bar>
+    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+      <View style={styles.main}>
+        <Bar></Bar>
 
-      <View style={styles.cart}>
-        <FontAwesome name='heart' size={40} color={'gray'} />
-        <Text style={styles.text}>Você não possui nenhum item</Text>
+        <View style={styles.cart}>
+          <FontAwesome name='heart' size={40} color={'gray'} />
+          <Text style={styles.text}>Você não possui nenhum item</Text>
+        </View>
       </View>
     </View>
   );
