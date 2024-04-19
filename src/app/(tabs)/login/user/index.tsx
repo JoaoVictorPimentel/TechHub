@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Bar from '../../../../components/searchBar';
 import { Icon } from '@rneui/base';
 import { router } from 'expo-router';
+import * as LocalAuthentication from 'expo-local-authentication'
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
 
       <Text style={styles.title}>Bem-vindo de volta, João</Text>
 
-      <TouchableOpacity style={{ height: 100 }}>
+      <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/login/user/data')}>
         <View style={{ alignItems: 'center', paddingTop: 20 }}>
           <View style={styles.item}>
             <View style={{ flexDirection: 'row', marginLeft: 20 }}>
@@ -24,7 +25,7 @@ export default function App() {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/cart')}>
+      <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/login/user/requests')}>
         <View style={{ alignItems: 'center', paddingTop: 20 }}>
           <View style={styles.item}>
             <View style={{ flexDirection: 'row', marginLeft: 20 }}>
@@ -37,7 +38,15 @@ export default function App() {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={{ height: 100 }}>
+      <TouchableOpacity style={{ height: 100 }} onPress={async () => {
+
+        const retorno = await LocalAuthentication.authenticateAsync();
+        if (retorno.success) {
+          router.push('/login/user/address');
+        } else {
+          Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
+        }
+      }}>
         <View style={{ alignItems: 'center', paddingTop: 20 }}>
           <View style={styles.item}>
             <View style={{ flexDirection: 'row', marginLeft: 20 }}>
@@ -51,7 +60,7 @@ export default function App() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={{alignItems: 'center', marginTop: 200}} onPress={() => router.push('/login')}>
+      <TouchableOpacity style={{ alignItems: 'center', marginTop: 200 }} onPress={() => router.push('/login')}>
         <View style={styles.exit}>
           <Icon name='logout' type='MaterialCommunityIcons' color='white' />
           <Text style={{ color: 'white', fontSize: 18 }}>

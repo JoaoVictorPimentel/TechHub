@@ -11,6 +11,7 @@ export default function Product() {
         Toast.show({
             type: 'success',
             text1: 'Item adicionado ao carrinho',
+            text1Style: {fontSize: 15},            
         });
     }
     const { product } = useShopContext();
@@ -69,6 +70,7 @@ export default function Product() {
                     </View>
                 </View>
             </ScrollView>
+            <Toast/>
         </View>
     );
 }
