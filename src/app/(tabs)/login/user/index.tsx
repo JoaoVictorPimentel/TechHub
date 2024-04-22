@@ -12,7 +12,15 @@ export default function App() {
 
       <Text style={styles.title}>Bem-vindo de volta, João</Text>
 
-      <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/login/user/data')}>
+      <TouchableOpacity style={{ height: 100 }} onPress={async () => {
+
+        const retorno = await LocalAuthentication.authenticateAsync();
+        if (retorno.success) {
+          router.push('/login/user/data');
+        } else {
+          Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
+        }
+      }}>
         <View style={{ alignItems: 'center', paddingTop: 20 }}>
           <View style={styles.item}>
             <View style={{ flexDirection: 'row', marginLeft: 20 }}>
