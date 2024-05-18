@@ -7,77 +7,79 @@ import * as LocalAuthentication from 'expo-local-authentication'
 
 export default function App() {
   return (
-    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
-      <Bar></Bar>
+    <TouchableOpacity>
+      <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+        <Bar></Bar>
 
-      <Text style={styles.title}>Bem-vindo de volta, João</Text>
+        <Text style={styles.title}>Bem-vindo de volta, João</Text>
 
-      <TouchableOpacity style={{ height: 100 }} onPress={async () => {
+        <TouchableOpacity style={{ height: 100 }} onPress={async () => {
 
-        const retorno = await LocalAuthentication.authenticateAsync();
-        if (retorno.success) {
-          router.push('/login/user/data');
-        } else {
-          Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
-        }
-      }}>
-        <View style={{ alignItems: 'center', paddingTop: 20 }}>
-          <View style={styles.item}>
-            <View style={{ flexDirection: 'row', marginLeft: 20 }}>
-              <Icon name='user' type='font-awesome' color='white' />
-              <Text style={styles.text}>Meus dados</Text>
-            </View>
-            <View style={{ marginRight: 20 }}>
-              <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/login/user/requests')}>
-        <View style={{ alignItems: 'center', paddingTop: 20 }}>
-          <View style={styles.item}>
-            <View style={{ flexDirection: 'row', marginLeft: 20 }}>
-              <Icon name='shopping-bag' type='font-awesome' color='white' />
-              <Text style={styles.text}>Meus pedidos</Text>
-            </View>
-            <View style={{ marginRight: 20 }}>
-              <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
+          const retorno = await LocalAuthentication.authenticateAsync();
+          if (retorno.success) {
+            router.push('/login/user/data');
+          } else {
+            Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
+          }
+        }}>
+          <View style={{ alignItems: 'center', paddingTop: 20 }}>
+            <View style={styles.item}>
+              <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+                <Icon name='user' type='font-awesome' color='white' />
+                <Text style={styles.text}>Meus dados</Text>
+              </View>
+              <View style={{ marginRight: 20 }}>
+                <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity style={{ height: 100 }} onPress={async () => {
-
-        const retorno = await LocalAuthentication.authenticateAsync();
-        if (retorno.success) {
-          router.push('/login/user/address');
-        } else {
-          Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
-        }
-      }}>
-        <View style={{ alignItems: 'center', paddingTop: 20 }}>
-          <View style={styles.item}>
-            <View style={{ flexDirection: 'row', marginLeft: 20 }}>
-              <Icon name='location-arrow' type='font-awesome' color='white' />
-              <Text style={styles.text}>Meus Endereços</Text>
-            </View>
-            <View style={{ marginRight: 20 }}>
-              <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ height: 100 }} onPress={() => router.push('/login/user/requests')}>
+          <View style={{ alignItems: 'center', paddingTop: 20 }}>
+            <View style={styles.item}>
+              <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+                <Icon name='shopping-bag' type='font-awesome' color='white' />
+                <Text style={styles.text}>Meus pedidos</Text>
+              </View>
+              <View style={{ marginRight: 20 }}>
+                <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ height: 100 }} onPress={async () => {
 
-      <TouchableOpacity style={{ alignItems: 'center', marginTop: 200 }} onPress={() => router.push('/login')}>
-        <View style={styles.exit}>
-          <Icon name='logout' type='MaterialCommunityIcons' color='white' />
-          <Text style={{ color: 'white', fontSize: 18 }}>
-            Sair
-          </Text>
-        </View>
-      </TouchableOpacity>
+          const retorno = await LocalAuthentication.authenticateAsync();
+          if (retorno.success) {
+            router.push('/login/user/address');
+          } else {
+            Alert.alert('Apenas o dono do celular pode acessar esses dados sensíveis');
+          }
+        }}>
+          <View style={{ alignItems: 'center', paddingTop: 20 }}>
+            <View style={styles.item}>
+              <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+                <Icon name='location-arrow' type='font-awesome' color='white' />
+                <Text style={styles.text}>Meus Endereços</Text>
+              </View>
+              <View style={{ marginRight: 20 }}>
+                <Icon name='arrow-right' type='font-awesome' color='white' size={17} />
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
 
-    </View>
+        <TouchableOpacity style={{ alignItems: 'center', marginTop: 200 }} onPress={() => router.push('/login')}>
+          <View style={styles.exit}>
+            <Icon name='logout' type='MaterialCommunityIcons' color='white' />
+            <Text style={{ color: 'white', fontSize: 18 }}>
+              Sair
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+      </View>
+    </TouchableOpacity>
   );
 }
 

@@ -1,13 +1,31 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Input } from '@rneui/themed';
+import { Input, Button } from '@rneui/themed';
 import { router } from 'expo-router';
+import { Formik } from 'formik';
+import { auth } from './../../../../../src/config/firebase-config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import Toast from 'react-native-toast-message';
+import * as Yup from 'yup';
 
 export default function RegisterScreen() {
+    const showToast = () => {
+        Toast.show({
+            type: 'sucess',
+            text1: 'Cadastrado com sucesso',
+            text1Style: {fontSize: 15},            
+        });
+    }
+    const handleCadastro = async({email, senha, nome, idade}:any) => {
+        await createUserWithEmailAndPassword(auth, email, senha)
+             .then(() => router.back())
+             .catch(erro => showToast())
+    }
+    
     return (
-        <View style={{flex: 1, backgroundColor: '#222'}}>
+        <View style={{ flex: 1, backgroundColor: '#222' }}>
 
-            <ScrollView style={{flex: 1}}>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={styles.background}>
                     <View style={{ alignItems: 'center', marginTop: '30%' }}>
                         <View style={styles.boxLogin}>
@@ -16,35 +34,52 @@ export default function RegisterScreen() {
                         </View>
                     </View>
 
-                    <Input style={styles.input}
-                        placeholder='Informe seu nome completo'
-                        leftIcon={{ name: 'person', color: 'white'}}/>
+                    <Formik
+                        initialValues={{ email: '', senha: '', nome: '', idade: '' }}
+                        onSubmit={handleCadastro}
+                        validationSchema={Yup.object({
+                            email: Yup.string().required('O campo email precisa existir').email('O campo precisa ser um email'),
+                            nome: Yup.string().required('O campo nome precisa existir'),
+                            idade: Yup.number().required('O campo idade precisa ser informado').positive('O valor precisa ser um número positivo'),
+                            senha: Yup.string().required('O campo senha precisa existir').min(8, 'O campo senha precisa ter no mínimo 8 caracteres')
+                        })}
+                    >
+                        {({ handleChange, errors, touched, handleBlur, isSubmitting, handleSubmit }) => (
+                            <View style={{ marginTop: 20 }}>
+                                
+                                <Input style={styles.input}
+                                    placeholder='Digite seu Email' 
+                                    leftIcon={{name:'person', color: (errors.email ? '#df361c' : 'white')}} 
+                                    inputStyle={{color: (errors.email ? '#df361c' : 'white')}}
+                                    onBlur={handleBlur('email')}
+                                    onChangeText={handleChange('email')}/>
+                                { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
 
-                    <Input style={styles.input}
-                        placeholder='Informe seu CPF'
-                        leftIcon={{ name: 'person', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        placeholder='Data de Nascimento'
-                        leftIcon={{ name: 'cake', type: 'materialIcons', color: 'white'}}/>
-                
-                    <Input style={styles.input}
-                        placeholder='Digite seu Email'
-                        leftIcon={{ name: 'email',type: 'fontisto', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        secureTextEntry
-                        placeholder='Digite sua senha'
-                        leftIcon={{ name: 'lock', color: 'white'}}/>
-                    
-                    <Input style={styles.input}
-                        secureTextEntry
-                        placeholder='Confirme sua senha'
-                        leftIcon={{ name: 'lock', color: 'white'}}/>
-    
-                    <View style={{alignItems: 'center'}}>
+                                <Input style={styles.input}
+                                    secureTextEntry
+                                    placeholder='Digite sua senha' 
+                                    leftIcon={{name:'lock', color: (errors.senha ? '#df361c' : 'white')}}
+                                    inputStyle={{color: (errors.senha ? '#df361c' : 'white')}}
+                                    onBlur={handleBlur('senha')}
+                                    onChangeText={handleChange('senha')}/>
+                                { errors.senha && touched.senha && <Text style={styles.fail}>{errors.senha}</Text>}
+
+                                <View style={{alignItems: 'center'}}> 
+                                    <Button
+                                        buttonStyle={styles.button} 
+                                        type='clear' 
+                                        titleStyle={{color: 'white'}} 
+                                        title="Entrar"
+                                        onPress={() => handleSubmit()} 
+                                        disabled={isSubmitting}/>
+                                </View>
+                            </View>
+                        )}
+                    </Formik>
+
+                    <View style={{ alignItems: 'center' }}>
                         <TouchableOpacity style={styles.button} onPress={() => router.push('/login')}>
-                            <Text style={{color: 'white', fontSize: 16}}>Criar conta</Text>
+                            <Text style={{ color: 'white', fontSize: 16 }}>Criar conta</Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={() => router.push('/login')}>
@@ -111,4 +146,10 @@ const styles = StyleSheet.create({
         width: 200,
         height: 160
     },
+    
+    fail: {
+        textAlign:'center',
+        color: '#df361c',
+        fontSize: 15,
+      },
 })

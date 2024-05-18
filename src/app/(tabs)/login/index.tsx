@@ -5,18 +5,25 @@ import { router } from 'expo-router';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './../../../../src/config/firebase-config';
+import Toast from 'react-native-toast-message';
 
 export default function LoginScreen (){
-    
+    const showToast = () => {
+        Toast.show({
+            type: 'error',
+            text1: 'Ocorreu um erro ao fazer o login, tente novamente!',
+            text1Style: {fontSize: 15},            
+        });
+    }
+
     const [ resultado, setResultado ] = useState<null|'falhou'>(null);
     
     const handleLogin = async ({email, senha}:any) => {
-        await new Promise((resolve, error) => setTimeout(() => resolve(), 1000))
-      
-        if (email.trim() == 'admin@gmail.com' && senha.trim() == '12345678') 
-            router.push('login/user')
-        else
-            setResultado('falhou')
+        await signInWithEmailAndPassword(auth, email, senha)
+            .then(usuario => router.replace('/home'))
+            .catch(erro => showToast());
     }
     
     return (
