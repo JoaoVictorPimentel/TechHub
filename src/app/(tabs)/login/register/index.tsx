@@ -35,12 +35,11 @@ export default function RegisterScreen() {
                     </View>
 
                     <Formik
-                        initialValues={{ email: '', senha: '', nome: '', idade: '' }}
+                        initialValues={{ email: '', senha: '', nome: ''}}
                         onSubmit={handleCadastro}
                         validationSchema={Yup.object({
                             email: Yup.string().required('O campo email precisa existir').email('O campo precisa ser um email'),
                             nome: Yup.string().required('O campo nome precisa existir'),
-                            idade: Yup.number().required('O campo idade precisa ser informado').positive('O valor precisa ser um número positivo'),
                             senha: Yup.string().required('O campo senha precisa existir').min(8, 'O campo senha precisa ter no mínimo 8 caracteres')
                         })}
                     >
@@ -54,6 +53,14 @@ export default function RegisterScreen() {
                                     onBlur={handleBlur('email')}
                                     onChangeText={handleChange('email')}/>
                                 { errors.email && touched.email && <Text style={styles.fail}>{errors.email}</Text>}
+                                
+                                <Input style={styles.input}
+                                    placeholder='Digite seu nome' 
+                                    leftIcon={{name:'person', color: (errors.nome ? '#df361c' : 'white')}} 
+                                    inputStyle={{color: (errors.nome ? '#df361c' : 'white')}}
+                                    onBlur={handleBlur('email')}
+                                    onChangeText={handleChange('email')}/>
+                                { errors.nome && touched.nome && <Text style={styles.fail}>{errors.nome}</Text>}
 
                                 <Input style={styles.input}
                                     secureTextEntry
