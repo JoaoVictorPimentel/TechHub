@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import Bar from '../../../../components/searchBar';
 import { Icon } from '@rneui/base';
+import * as LocalAuthentication from 'expo-local-authentication';
 import { router } from 'expo-router';
-import * as LocalAuthentication from 'expo-local-authentication'
+import * as React from 'react';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Bar from '../../../../components/searchBar';
+import { auth } from '../../../../config/firebase-config';
 
 export default function App() {
   return (
-    <TouchableOpacity>
-      <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
-        <Bar></Bar>
+    <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
+      <Bar></Bar>
 
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Bem-vindo de volta, João</Text>
 
         <TouchableOpacity style={{ height: 100 }} onPress={async () => {
-
           const retorno = await LocalAuthentication.authenticateAsync();
           if (retorno.success) {
             router.push('/login/user/data');
@@ -69,7 +69,10 @@ export default function App() {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{ alignItems: 'center', marginTop: 200 }} onPress={() => router.push('/login')}>
+        <TouchableOpacity style={{ alignItems: 'center', marginTop: 200 }} onPress={async () => {
+          auth.signOut()
+          router.replace('/login')
+        }}>
           <View style={styles.exit}>
             <Icon name='logout' type='MaterialCommunityIcons' color='white' />
             <Text style={{ color: 'white', fontSize: 18 }}>
@@ -77,9 +80,9 @@ export default function App() {
             </Text>
           </View>
         </TouchableOpacity>
-
-      </View>
-    </TouchableOpacity>
+      </ScrollView>
+    </View>
+ 
   );
 }
 

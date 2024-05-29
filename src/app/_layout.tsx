@@ -1,7 +1,8 @@
 import { Stack, useFocusEffect } from "expo-router";
-import { ShopProvider } from "../providers/shop";
 import React from "react";
 import { StatusBar } from "react-native";
+import { ShopProvider } from "../providers/shop";
+import { CartProvider } from './../providers/cart';
 
 export default function Layout() {
     useFocusEffect(
@@ -11,8 +12,10 @@ export default function Layout() {
     );
 
     return (
-        <ShopProvider>
-            <Stack screenOptions={{ headerShown: false }} />
-        </ShopProvider>
+        <CartProvider>
+            <ShopProvider>
+                <Stack screenOptions={{ headerShown: false }} />
+            </ShopProvider>
+        </CartProvider>
     )
 }

@@ -1,44 +1,47 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from '@rneui/base';
-import Bar from '../../../../../components/searchBar';
 import { router } from 'expo-router';
+import * as React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Bar from '../../../../../components/searchBar';
 
 export default function App() {
   return (
     <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
       <Bar></Bar>
 
-      <Text style={styles.title}>Meus pedidos</Text>
-      <View style={styles.request}>
-        <Text style={styles.title2}>Pedidos recentes</Text>
-        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.push('/login/user')}>
-          <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
-          <Text style={styles.voltar}>Voltar</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
-      <TouchableOpacity style={{ alignItems: 'center', paddingTop: 20 }} onPress={() => router.push('/login/user/details')}>
-        <View style={styles.container}>
-            <Text style={styles.titleOrder}>#103215</Text>
-            <View style={{flexDirection: 'row', marginLeft: 10}}>
-                <Text style={styles.text}>Data:</Text>
-                <Text style={styles.text2}>06/03/2024</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginLeft: 10}}>
-                <Text style={styles.text}>Valor total:</Text>
-                <Text style={styles.text2}>R$390,00</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginLeft: 10}}>
-                <Text style={styles.text}>Data:</Text>
-                <Text style={styles.text2}>06/03/2024</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginLeft: 10}}>
-                <Text style={styles.text}>Status:</Text>
-                <Text style={styles.text2}>Pedido entregue</Text>
-            </View>
+        <Text style={styles.title}>Meus pedidos</Text>
+        <View style={styles.request}>
+          <Text style={styles.title2}>Pedidos recentes</Text>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.back()}>
+            <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
+            <Text style={styles.voltar}>Voltar</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+
+        <TouchableOpacity style={{ alignItems: 'center', paddingTop: 20 }} onPress={() => router.push('/login/user/details')}>
+          <View style={styles.container}>
+            <Text style={styles.titleOrder}>#103215</Text>
+            <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+              <Text style={styles.text}>Data:</Text>
+              <Text style={styles.text2}>06/03/2024</Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+              <Text style={styles.text}>Valor total:</Text>
+              <Text style={styles.text2}>R$390,00</Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+              <Text style={styles.text}>Data:</Text>
+              <Text style={styles.text2}>06/03/2024</Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+              <Text style={styles.text}>Status:</Text>
+              <Text style={styles.text2}>Pedido entregue</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#111',
     width: '95%',
-    height: '60%',
+    height: '90%',
     borderRadius: 10
   },
   text: {

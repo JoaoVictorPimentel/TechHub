@@ -21,7 +21,7 @@ export default function Card({ valor }: CardProps) {
     return (
         <TouchableOpacity onPress={handleOpenProduct}>
             <View style={styles.card}>
-                <Image style={styles.imageCard} source={valor.image} />
+                <Image style={styles.imageCard} source={{uri:valor.image}} />
 
                 <View style={{ flexDirection: 'column', padding: 10}}>
                     <Text style={styles.titleCard}>{valor.name}</Text>

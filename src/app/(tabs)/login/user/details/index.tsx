@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import Bar from '../../../../../components/searchBar';
+import { FontAwesome } from '@expo/vector-icons';
 import { Icon } from '@rneui/base';
 import { router } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons';
+import * as React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Bar from '../../../../../components/searchBar';
 
-export default function App(props: AppProps) {
+export default function App() {
     return (
         <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
             <Bar></Bar>
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.order}>
                     <Text style={styles.title}>Detalhes do pedido</Text>
-                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.push('/login/user/requests')}>
+                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => router.back()}>
                         <Icon name='chevron-left' color={'white'} size={17} style={{ marginTop: 7 }} />
                         <Text style={styles.voltar}>Voltar</Text>
                     </TouchableOpacity>

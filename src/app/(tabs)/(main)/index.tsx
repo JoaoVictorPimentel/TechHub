@@ -1,24 +1,46 @@
+import { collection, getDocs } from 'firebase/firestore';
 import * as React from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Banner from '../../../components/banner';
-import Bar from '../../../components/searchBar';
-import Card from '../../../components/card';
 import BannerPromo from '../../../components/bannerPromo';
+import Card from '../../../components/card';
 import Card2 from '../../../components/card2';
+import Bar from '../../../components/searchBar';
+import { db } from '../../../config/firebase-config';
 
 export default function Main() {
-    const vetor = [
-        { image: require('../../../assets/imgs/g733.png'), name: 'Logitech G733', promoValue: 999.99, value: 799.99, valuePortion: 849.99 },
-        { image: require('../../../assets/imgs/superlight.webp'), name: 'Superlight', promoValue: 799.99, value: 549.99, valuePortion: 599.99 },
-        { image: require('../../../assets/imgs/gpro.png'), name: 'Logitech G PRO', promoValue: 1299.99, value: 1099.99, valuePortion: 1199.99 },
-        { image: require('../../../assets/imgs/placa.png'), name: 'RTX 4090', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 }
-    ]
-    const vetor2 = [
-        { image: require('../../../assets/imgs/g733.png'), name: 'Logitech G733', promoValue: 999.99, value: 799.99, valuePortion: 849.99 },
-        { image: require('../../../assets/imgs/superlight.webp'), name: 'Superlight', promoValue: 799.99, value: 549.99, valuePortion: 599.99 },
-        { image: require('../../../assets/imgs/gpro.png'), name: 'Logitech G PRO', promoValue: 1299.99, value: 1099.99, valuePortion: 1199.99 },
-        { image: require('../../../assets/imgs/placa.png'), name: 'RTX 4090', promoValue: 3999.99, value: 2499.99, valuePortion: 2999.99 }
-    ]
+
+    const [ vetor, setVetor ] = React.useState([])
+    const [ vetor2, setVetor2 ] = React.useState([])
+
+
+    const buscarDados = async () => {
+        const snapshots  = await getDocs(collection(db, 'produtos'))
+        const dados: any = []
+        snapshots.forEach(snapshot => {
+            dados.push(snapshot.data())
+        })
+        setVetor(dados)
+    }
+
+    const buscarDados2 = async () => {
+        const snapshots = await getDocs(collection(db, 'produtosPromo'))
+        const dados: any = []
+        snapshots.forEach(snapshot => {
+            dados.push(snapshot.data())
+        })
+        setVetor2(dados)
+    }
+
+    React.useEffect(() => {
+        buscarDados()
+    }, [])
+    
+    React.useEffect(() => {
+        buscarDados2()
+    }, [])
+
+  
     return (
         <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
             <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
@@ -30,7 +52,7 @@ export default function Main() {
 
                 <Text style={styles.title}>Lançamentos</Text>
 
-                <View>
+                <View style={{marginRight: 10}}>
                     <ScrollView>
                         <FlatList
                             data={vetor}
@@ -51,7 +73,6 @@ export default function Main() {
                     {vetor2.map((item, index) => (
                         <Card2 valor={item} key={index} />
                     ))}
-
                 </View>
             </ScrollView>
         </View>

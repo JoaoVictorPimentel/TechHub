@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { View, StyleSheet, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
-import {Button, Input} from '@rneui/themed';
+import { Button, Input } from '@rneui/themed';
 import { router } from 'expo-router';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './../../../../src/config/firebase-config';
+import { Formik } from 'formik';
+import * as React from 'react';
+import { useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import * as Yup from 'yup';
+import { auth } from './../../../../src/config/firebase-config';
 
 export default function LoginScreen (){
     const showToast = () => {
@@ -21,15 +21,19 @@ export default function LoginScreen (){
     const [ resultado, setResultado ] = useState<null|'falhou'>(null);
     
     const handleLogin = async ({email, senha}:any) => {
+        console.log(email, senha)
         await signInWithEmailAndPassword(auth, email, senha)
-            .then(usuario => router.replace('/home'))
-            .catch(erro => showToast());
+            .then(usuario =>  router.replace('/login/user'))
+            .catch(erro => {
+                console.log(erro)
+                showToast()
+    });
     }
     
     return (
         <View style={{flex: 1, backgroundColor: '#222'}}>
 
-            <ScrollView style={{flex: 1}}>
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                 <View style={styles.background}>
                     <View style={{alignItems: 'center', marginTop: '30%'}}>
                         <View style={styles.boxLogin}>
@@ -99,7 +103,7 @@ export default function LoginScreen (){
 const styles = StyleSheet.create ({
    background: {
     backgroundColor: '#222',
-    marginBottom: 80
+    marginBottom: 180
    },
 
    boxLogin: {

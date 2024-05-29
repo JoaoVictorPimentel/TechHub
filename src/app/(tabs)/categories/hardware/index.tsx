@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import Bar from '../../../../components/searchBar';
 import { Icon } from '@rneui/themed';
 import { router } from 'expo-router';
+import * as React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Bar from '../../../../components/searchBar';
 
 export interface AppProps {
 }
@@ -19,7 +19,7 @@ export default function App(props: AppProps) {
 
           <View style={styles.categoria}>
             <Text style={styles.title2}>Hardwares</Text>
-            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.push('/categories')}>
+            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => router.back()}>
               <Icon name='chevron-left' color={'white'} size={17} style={{marginTop: 7}}/>
               <Text style={styles.voltar}>Voltar</Text>
             </TouchableOpacity>

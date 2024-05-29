@@ -1,8 +1,8 @@
+import { router } from 'expo-router';
 import * as React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 import { useShopContext } from '../providers/shop';
-import { router } from 'expo-router';
 
 export interface Card2Props {
     valor: {image: any, name: string, promoValue: Float, value: Float, valuePortion: Float}
@@ -20,7 +20,7 @@ export default function Card2({valor}: Card2Props) {
     return (
         <TouchableOpacity onPress={handleOpenProduct}>
             <View style={styles.card}>
-                <Image style={styles.imageCard} source={valor.image} />
+                <Image style={styles.imageCard} source={{ uri: valor.image }} />
                 
                 <View style={{flexDirection: 'column', padding: 10}}> 
                     <Text style={styles.titleCard}>{valor.name}</Text>

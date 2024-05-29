@@ -1,12 +1,13 @@
-import * as React from 'react';
-import { View, StyleSheet, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Input, Button } from '@rneui/themed';
+import { Button, Input } from '@rneui/themed';
 import { router } from 'expo-router';
-import { Formik } from 'formik';
-import { auth } from './../../../../../src/config/firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { Formik } from 'formik';
+import * as React from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
+import { auth, db } from './../../../../../src/config/firebase-config';
 
 export default function RegisterScreen() {
     const showToast = () => {
@@ -16,16 +17,26 @@ export default function RegisterScreen() {
             text1Style: {fontSize: 15},            
         });
     }
-    const handleCadastro = async({email, senha, nome, idade}:any) => {
+    const handleCadastro = async({email, senha, nome}:any) => {
+        console.log(email)
+        console.log(senha)
         await createUserWithEmailAndPassword(auth, email, senha)
-             .then(() => router.back())
-             .catch(erro => showToast())
+             .then(async (snapshot) => { 
+                const documento = doc(db, `usuarios`, snapshot.user.uid )
+                await setDoc(documento, {
+                    email, 
+                    nome,
+                    uid: snapshot.user.uid 
+                })
+                router.back()
+            })
+             .catch(erro => console.log(erro))
     }
     
     return (
         <View style={{ flex: 1, backgroundColor: '#222' }}>
 
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                 <View style={styles.background}>
                     <View style={{ alignItems: 'center', marginTop: '30%' }}>
                         <View style={styles.boxLogin}>
@@ -58,8 +69,8 @@ export default function RegisterScreen() {
                                     placeholder='Digite seu nome' 
                                     leftIcon={{name:'person', color: (errors.nome ? '#df361c' : 'white')}} 
                                     inputStyle={{color: (errors.nome ? '#df361c' : 'white')}}
-                                    onBlur={handleBlur('email')}
-                                    onChangeText={handleChange('email')}/>
+                                    onBlur={handleBlur('nome')}
+                                    onChangeText={handleChange('nome')}/>
                                 { errors.nome && touched.nome && <Text style={styles.fail}>{errors.nome}</Text>}
 
                                 <Input style={styles.input}
@@ -83,12 +94,6 @@ export default function RegisterScreen() {
                             </View>
                         )}
                     </Formik>
-
-                    <View style={{ alignItems: 'center' }}>
-                        <TouchableOpacity style={styles.button} onPress={() => router.push('/login')}>
-                            <Text style={{ color: 'white', fontSize: 16 }}>Criar conta</Text>
-                        </TouchableOpacity>
-                    </View>
                     <TouchableOpacity onPress={() => router.push('/login')}>
                         <Text style={styles.register}>Já possui uma conta? Entrar</Text>
                     </TouchableOpacity>
@@ -101,7 +106,7 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#222',
-        paddingBottom: 80
+        paddingBottom: 180
     },
 
     boxLogin: {

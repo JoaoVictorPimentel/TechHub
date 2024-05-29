@@ -1,25 +1,40 @@
-import * as React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
-import { useShopContext } from './../../../../providers/shop';
-import { router } from 'expo-router';
-import Bar from '../../../../components/searchBar';
 import { Icon } from '@rneui/themed';
+import { router } from 'expo-router';
+import * as React from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import Bar from '../../../../components/searchBar';
+import { useCartContext } from './../../../../providers/cart';
+import { useShopContext } from './../../../../providers/shop';
 
 export default function Product() {
     const showToast = () => {
         Toast.show({
             type: 'success',
             text1: 'Item adicionado ao carrinho',
-            text1Style: {fontSize: 15},            
+            text1Style: { fontSize: 15 },
         });
     }
     const { product } = useShopContext();
+    const { addToCart } = useCartContext();
+
+    const handleAddToCart = () => {
+        if (product && product.value) {
+            addToCart(product);
+            showToast();
+        } else {
+            Toast.show({
+                type: 'error',
+                text1: 'Erro ao adicionar ao carrinho',
+                text1Style: { fontSize: 15 },
+            });
+        }
+    }
 
     return (
         <View style={{ flex: 1, paddingTop: 40, backgroundColor: '#222' }}>
             <ScrollView>
-                <View>
+                <View style={{ paddingBottom: 80 }}>
                     <Bar></Bar>
 
                     <View style={styles.top}>
@@ -33,7 +48,7 @@ export default function Product() {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.imageView}>
-                        <Image style={styles.image} source={product?.image} />
+                        <Image style={styles.image} source={{ uri: product?.image }} />
                     </View>
                     <View style={styles.info}>
                         <View style={styles.infoItem}>
@@ -63,14 +78,14 @@ export default function Product() {
                     </View>
 
                     <View style={{ alignItems: 'center', marginTop: 20 }}>
-                        <TouchableOpacity style={styles.btn} onPress={showToast}>
+                        <TouchableOpacity style={styles.btn} onPress={handleAddToCart}>
                             <Icon name='cart-plus' type='font-awesome' color={'white'} size={24} />
                             <Text style={styles.buy}>Comprar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
-            <Toast/>
+            <Toast />
         </View>
     );
 }
@@ -153,4 +168,4 @@ const styles = StyleSheet.create({
         color: 'white',
         marginLeft: 6
     }
-})
+});
